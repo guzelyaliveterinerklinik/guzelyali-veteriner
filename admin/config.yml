@@ -1,0 +1,231 @@
+# Güzelyalı Veteriner Kliniği · site paneli (Decap CMS)
+# Panel siteadresi.com/admin adresinde açılır. Her kayıt content/ klasöründeki bir dosyayı günceller;
+# barındırma servisi siteyi otomatik olarak yeniden üretir (npm run build) ve 1-2 dakikada yayına alır.
+
+locale: tr
+logo_url: /favicon.svg
+site_url: https://www.adanaguzelyaliveteriner.com
+display_url: https://www.adanaguzelyaliveteriner.com
+
+# Canlı sitede giriş yöntemi. Yayına alırken doldurulacak (YAYINA-ALMA.md):
+#   Decap Turbo  -> name: turbo-github  (işletmeci e-postayla davet edilir, GitHub hesabı gerekmez)
+#   GitHub       -> name: github, repo: KULLANICI/DEPO
+backend:
+  name: github
+  repo: KULLANICI/guzelyali-veteriner
+  branch: main
+  commit_messages:
+    create: "Yeni {{collection}}: {{slug}}"
+    update: "Güncellendi: {{collection}} / {{slug}}"
+    delete: "Silindi: {{collection}} / {{slug}}"
+    uploadMedia: "Fotoğraf yüklendi: {{path}}"
+    deleteMedia: "Fotoğraf silindi: {{path}}"
+
+# Bilgisayarda denerken: "npx decap-server" çalışırken panel dosyalara doğrudan yazar. Canlı sitede etkisi yok.
+local_backend: true
+
+media_folder: assets/img/uploads
+public_folder: /assets/img/uploads
+
+slug:
+  encoding: ascii
+  clean_accents: true
+  sanitize_replacement: "-"
+
+editor:
+  preview: false
+
+collections:
+
+  # ---------------------------------------------------------------- Blog
+  - name: blog
+    label: Blog yazıları
+    label_singular: blog yazısı
+    description: "Yeni yazı eklemek için “+ blog yazısı” düğmesine basın. “Yayınla → Şimdi yayımla” dedikten 1-2 dakika sonra yazı sitede görünür."
+    folder: content/blog
+    create: true
+    delete: true
+    extension: md
+    format: frontmatter
+    identifier_field: title
+    slug: "{{title}}"
+    summary: "{{title}} · {{date | date('DD.MM.YYYY')}}"
+    sortable_fields: [date, title]
+    fields:
+      - { label: "Başlık", name: title, widget: string, hint: "Kısa ve net olsun. Örnek: Kedilerde kısırlaştırma sonrası bakım" }
+      - { label: "Yayın tarihi", name: date, widget: datetime, default: "{{now}}", format: "YYYY-MM-DD", date_format: "DD.MM.YYYY", time_format: false, picker_utc: true }
+      - { label: "Kategori", name: tag, widget: string, hint: "Tek ya da iki kelime: Aşı, Parazit, Diş sağlığı, Beslenme…" }
+      - { label: "Kısa özet", name: excerpt, widget: text, hint: "Blog listesinde ve Google aramasında görünen 1-2 cümle." }
+      - { label: "Kapak fotoğrafı", name: cover, widget: image, choose_url: false, hint: "Yatay bir fotoğraf seçin. Boyutu önemli değil; site otomatik küçültür." }
+      - { label: "Kapak fotoğrafında ne var?", name: cover_alt, widget: string, hint: "Bir cümleyle anlatın (görme engelli ziyaretçiler ve Google için). Örnek: Muayene masasında bekleyen gri bir kedi" }
+      - label: "Yazı"
+        name: body
+        widget: markdown
+        modes: [rich_text]
+        buttons: [bold, italic, link, heading-two, heading-three, bulleted-list, numbered-list, quote]
+        editor_components: []
+        hint: "Ara başlıklar için “Başlık 2” kullanın. “Alıntı” olarak yazdığınız paragraf sitede turuncu uyarı kutusu olur."
+      - { label: "Taslak", name: draft, widget: boolean, default: false, required: false, hint: "Açıkken yazı sitede görünmez; hazır olunca kapatın." }
+      - { label: "İngilizce · Başlık", name: title_en, widget: string, required: false, hint: "İsteğe bağlı. İngilizce başlık ve yazı boş kalırsa yazı yalnızca Türkçe sitede çıkar." }
+      - { label: "İngilizce · Kategori", name: tag_en, widget: string, required: false }
+      - { label: "İngilizce · Kısa özet", name: excerpt_en, widget: text, required: false }
+      - { label: "İngilizce · Kapak fotoğrafında ne var?", name: cover_alt_en, widget: string, required: false }
+      - { label: "İngilizce · Yazı", name: body_en, widget: markdown, required: false, modes: [rich_text], buttons: [bold, italic, link, heading-two, heading-three, bulleted-list, numbered-list, quote], editor_components: [] }
+      - { label: "İngilizce · Sayfa adresi", name: slug_en, widget: string, required: false, hint: "Boş bırakın; İngilizce başlıktan otomatik oluşur." }
+
+  # ---------------------------------------------------------------- Sayfalar
+  - name: sayfalar
+    label: Sayfalar ve ayarlar
+    description: "Sitedeki sabit yazılar, hizmetler, sık sorulan sorular, yorumlar, telefon ve çalışma saatleri. Sağdaki “İngilizce” alanları boş bırakılırsa İngilizce sitede eski metin kalır."
+    delete: false
+    files:
+
+      - name: ayarlar
+        label: "İletişim ve çalışma saatleri"
+        file: content/ayarlar.yml
+        fields:
+          - { label: "Telefon (uluslararası)", name: phone, widget: string, hint: "Arama ve WhatsApp bağlantıları için. Örnek: +905419162053" }
+          - { label: "Telefon (sitede görünen)", name: phone_display, widget: string, hint: "Örnek: 0541 916 20 53" }
+          - { label: "E-posta", name: email, widget: string, required: false, pattern: ['^[^@\s]+@[^@\s]+\.[^@\s]+$', "Geçerli bir e-posta adresi yazın"], hint: "Altbilgide ve İletişim sayfasında görünür." }
+          - { label: "WhatsApp hazır mesajı", name: whatsapp_message, widget: string, hint: "Randevu butonlarına basınca WhatsApp'ta yazılı gelen cümle." }
+          - { label: "İngilizce · WhatsApp hazır mesajı", name: whatsapp_message_en, widget: string, required: false }
+          - { label: "Adres (cadde, apartman, numara)", name: street, widget: string }
+          - { label: "Adres (mahalle, posta kodu, ilçe / il)", name: district, widget: string }
+          - { label: "Google Haritalar bağlantısı", name: maps_link, widget: string, hint: "“Yol tarifi al” butonu bu adrese gider." }
+          - { label: "Instagram adresi", name: instagram, widget: string }
+          - { label: "Google puanı", name: rating, widget: number, value_type: float, min: 1, max: 5, step: 0.1, hint: "Google profilindeki puan. Ayda bir güncelleyin." }
+          - { label: "Google yorum sayısı", name: review_count, widget: number, value_type: int, min: 0 }
+          - label: "Çalışma saatleri"
+            name: hours
+            widget: list
+            allow_add: false
+            collapsed: false
+            summary: "{{fields.day}}: {{fields.from}}–{{fields.to}}"
+            hint: "Kapalı olduğunuz gün için “Açık” düğmesini kapatın. Saatleri 09:30 biçiminde yazın."
+            fields:
+              - { label: "Gün", name: day, widget: select, options: [Pazartesi, Salı, Çarşamba, Perşembe, Cuma, Cumartesi, Pazar] }
+              - { label: "Açık", name: open, widget: boolean, default: true }
+              - { label: "Açılış", name: from, widget: string, required: false, pattern: ['^([01][0-9]|2[0-3]):[0-5][0-9]$', "Saat 09:30 biçiminde olmalı"] }
+              - { label: "Kapanış", name: to, widget: string, required: false, pattern: ['^([01][0-9]|2[0-3]):[0-5][0-9]$', "Saat 20:00 biçiminde olmalı"] }
+          - { label: "Saatlerin kısa yazımı", name: hours_summary, widget: string, hint: "Sitenin üst kısmında ve altbilgide görünür. Örnek: Pzt–Cmt 09:30–20:00" }
+          - { label: "İngilizce · Saatlerin kısa yazımı", name: hours_summary_en, widget: string, required: false, hint: "Örnek: Mon–Sat 09:30–20:00" }
+          - { label: "İletişim sayfası fotoğrafı", name: contact_photo, widget: image, choose_url: false, hint: "Haritanın yanında durur. Kliniğin dış cephesi en uygunu." }
+          - { label: "İletişim fotoğrafında ne var?", name: contact_photo_alt, widget: string }
+
+      - name: anasayfa
+        label: "Anasayfa"
+        file: content/anasayfa.yml
+        fields:
+          - { label: "Büyük başlık", name: hero_title, widget: string, hint: "Kedinin yanındaki büyük başlık." }
+          - { label: "Başlığın altındaki yazı", name: hero_text, widget: text }
+          - { label: "Hakkımızda bölümü · Başlık", name: about_title, widget: string }
+          - { label: "Hakkımızda bölümü · Yazı", name: about_text, widget: text }
+          - label: "Hakkımızda bölümü · Maddeler"
+            name: about_points
+            widget: list
+            summary: "{{fields.text}}"
+            fields:
+              - { label: "Madde", name: text, widget: string }
+              - { label: "İngilizce · Madde", name: text_en, widget: string, required: false }
+          - { label: "“Randevu üç adımda” fotoğrafı", name: booking_photo, widget: image, choose_url: false }
+          - { label: "Bu fotoğrafta ne var?", name: booking_photo_alt, widget: string }
+          - { label: "İngilizce · Büyük başlık", name: hero_title_en, widget: string, required: false }
+          - { label: "İngilizce · Başlığın altındaki yazı", name: hero_text_en, widget: text, required: false }
+          - { label: "İngilizce · Hakkımızda başlığı", name: about_title_en, widget: string, required: false }
+          - { label: "İngilizce · Hakkımızda yazısı", name: about_text_en, widget: text, required: false }
+
+      - name: hakkimizda
+        label: "Hakkımızda sayfası"
+        file: content/hakkimizda.yml
+        fields:
+          - { label: "Başlık", name: title, widget: string }
+          - { label: "Giriş cümlesi", name: intro, widget: text, hint: "Başlığın hemen altında görünür; Google'da da sayfa açıklaması olarak çıkar." }
+          - label: "Paragraflar"
+            name: paragraphs
+            widget: list
+            summary: "{{fields.text}}"
+            fields:
+              - { label: "Paragraf", name: text, widget: text }
+              - { label: "İngilizce · Paragraf", name: text_en, widget: text, required: false }
+          - { label: "Klinik fotoğrafı", name: clinic_photo, widget: image, choose_url: false }
+          - { label: "Klinik fotoğrafında ne var?", name: clinic_photo_alt, widget: string }
+          - { label: "Hekimin adı", name: vet_name, widget: string }
+          - { label: "Hekimin fotoğrafı", name: vet_photo, widget: image, choose_url: false, hint: "Kare bir portre en iyi sonucu verir." }
+          - { label: "Hekim hakkında yazı", name: vet_text, widget: text }
+          - { label: "İngilizce · Başlık", name: title_en, widget: string, required: false }
+          - { label: "İngilizce · Giriş cümlesi", name: intro_en, widget: text, required: false }
+          - { label: "İngilizce · Hekim hakkında yazı", name: vet_text_en, widget: text, required: false }
+
+      - name: hizmetler
+        label: "Hizmetler"
+        file: content/hizmetler.yml
+        fields:
+          - label: "Hizmetler"
+            name: items
+            widget: list
+            summary: "{{fields.title}}"
+            hint: "Sıralamayı sürükleyerek değiştirebilirsiniz. Anasayfada ve Hizmetler sayfasında bu sırayla görünür."
+            fields:
+              - { label: "Başlık", name: title, widget: string }
+              - label: "Simge"
+                name: icon
+                widget: select
+                default: steth
+                options:
+                  - { label: "Stetoskop", value: steth }
+                  - { label: "Neşter", value: scalpel }
+                  - { label: "Şırınga", value: syringe }
+                  - { label: "Kalkan", value: shield }
+                  - { label: "Diş", value: tooth }
+                  - { label: "Kulak", value: ear }
+                  - { label: "Mama kabı", value: bowl }
+                  - { label: "Makas", value: scissors }
+                  - { label: "Alışveriş çantası", value: bag }
+                  - { label: "Kalp ritmi", value: pulse }
+                  - { label: "Görüntüleme", value: scan }
+                  - { label: "Serum", value: drip }
+              - { label: "Fotoğraf", name: photo, widget: image, choose_url: false }
+              - { label: "Kısa açıklama", name: short, widget: string, hint: "Anasayfadaki kartta görünen tek cümle." }
+              - { label: "Ayrıntılı açıklama", name: body, widget: text, hint: "Hizmetler sayfasında görünen paragraf." }
+              - label: "Maddeler"
+                name: points
+                widget: list
+                summary: "{{fields.text}}"
+                fields:
+                  - { label: "Madde", name: text, widget: string }
+                  - { label: "İngilizce · Madde", name: text_en, widget: string, required: false }
+              - { label: "Buton yazısı (isteğe bağlı)", name: button, widget: string, required: false, hint: "Boş bırakılırsa “Bu hizmet için randevu al” yazar." }
+              - { label: "WhatsApp mesajı (isteğe bağlı)", name: message, widget: string, required: false, hint: "Boş bırakılırsa “Merhaba, … için randevu almak istiyorum.” gönderilir." }
+              - { label: "İngilizce · Başlık", name: title_en, widget: string, required: false }
+              - { label: "İngilizce · Kısa açıklama", name: short_en, widget: string, required: false }
+              - { label: "İngilizce · Ayrıntılı açıklama", name: body_en, widget: text, required: false }
+              - { label: "İngilizce · Buton yazısı", name: button_en, widget: string, required: false }
+              - { label: "İngilizce · WhatsApp mesajı", name: message_en, widget: string, required: false }
+
+      - name: sss
+        label: "Sık sorulan sorular"
+        file: content/sss.yml
+        fields:
+          - label: "Sorular"
+            name: items
+            widget: list
+            summary: "{{fields.question}}"
+            fields:
+              - { label: "Soru", name: question, widget: string }
+              - { label: "Cevap", name: answer, widget: text }
+              - { label: "İngilizce · Soru", name: question_en, widget: string, required: false }
+              - { label: "İngilizce · Cevap", name: answer_en, widget: text, required: false }
+
+      - name: yorumlar
+        label: "Google yorumlarından alıntılar"
+        file: content/yorumlar.yml
+        fields:
+          - label: "Yorumlar"
+            name: items
+            widget: list
+            summary: "{{fields.name}}"
+            hint: "Anasayfada görünür. Dört yorum en iyi düzeni verir. Yalnızca Google'da gerçekten yazılmış yorumları ekleyin."
+            fields:
+              - { label: "İsim (ad ve soyadın baş harfi)", name: name, widget: string, hint: "Örnek: Turgay K." }
+              - { label: "Yorum", name: text, widget: text }
+              - { label: "İngilizce · Yorum", name: text_en, widget: text, required: false }

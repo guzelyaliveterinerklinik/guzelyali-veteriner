@@ -1,0 +1,21 @@
+items:
+  - question: Hangi hayvanlara bakıyorsunuz?
+    answer: Kedi ve köpeklerin muayene, teşhis, tedavi ve cerrahi müdahalelerini yapıyoruz.
+    question_en: Which animals do you treat?
+    answer_en: We examine, diagnose, treat and operate on cats and dogs.
+  - question: Randevuyu nasıl alabilirim?
+    answer: WhatsApp’tan ya da 0541 916 20 53 numarasını arayarak randevu alabilirsiniz. Hayvanınızın türünü, yaşını ve şikâyetini kısaca yazmanız hazırlık yapmamızı kolaylaştırır.
+    question_en: How do I book an appointment?
+    answer_en: Message us on WhatsApp or call +90 541 916 20 53. A short note on your pet’s species, age and complaint helps us prepare.
+  - question: Kliniğinizden mama alabilir miyim?
+    answer: Evet. Pet shop bölümümüzde veteriner diyet grubu mamalar, mamalar ve kedi-köpek ürünleri var. Aradığınız ürünü WhatsApp’tan sorabilirsiniz.
+    question_en: Can I buy pet food at the clinic?
+    answer_en: Yes. Our pet shop has veterinary diet foods, regular food and products for cats and dogs. Message us on WhatsApp to check a product.
+  - question: Aşı takvimini nasıl öğrenirim?
+    answer: İlk ziyarette hayvanınızı muayene eder, yaşına ve sağlık durumuna göre aşı planını çıkarırız. Her aşıdan sonra bir sonraki tarihi aşı karnesine yazarız.
+    question_en: How do I know my pet’s vaccination schedule?
+    answer_en: At the first visit we examine your pet and plan the vaccines for its age and health. After each vaccine we write the next date in the vaccination card.
+  - question: Muayeneye gelirken neler getirmeliyim?
+    answer: Varsa aşı karnesini, kullandığı ilaçları ve daha önceki tahlil sonuçlarını getirin. Kedileri taşıma çantasında, köpekleri tasmalı getirmeniz hem onlar hem diğer hastalar için daha güvenlidir.
+    question_en: What should I bring to the visit?
+    answer_en: Bring the vaccination card, any medicines your pet takes and earlier test results. Please bring cats in a carrier and dogs on a lead; it is safer for them and for other patients.

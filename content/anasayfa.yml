@@ -1,0 +1,17 @@
+hero_title: Onların Sağlığı, Bizim Önceliğimiz.
+hero_title_en: Their Health, Our Priority.
+hero_text: Güzelyalı Veteriner Kliniği olarak; kapsamlı veteriner hekimlik hizmetlerimiz, uzman bakım uygulamalarımız ve özenle seçilmiş mama ve pet ürünlerimizle minik dostlarınızın tüm ihtiyaçlarına cevap veriyoruz.
+hero_text_en: At Güzelyalı Veterinary Clinic, we meet all of your little friends’ needs with comprehensive veterinary services, expert care and carefully chosen food and pet products.
+about_title: Dostlarınızın Sağlığı İçin Sevgi ve Özenle
+about_title_en: With Love and Care for Your Pets’ Health
+about_text: Veteriner Hekim Salim Hakveren tarafından Adana’da kurulan Güzelyalı Veteriner Kliniği, 2020 yılından bu yana evcil hayvanların sağlığını ve yaşam kalitesini ön planda tutarak hizmet vermektedir.
+about_text_en: Founded in Adana by veterinarian Salim Hakveren, Güzelyalı Veterinary Clinic has been caring for pets since 2020, putting their health and quality of life first.
+about_points:
+  - text: Muayene, teşhis, tedavi ve cerrahi müdahaleler
+    text_en: Examination, diagnosis, treatment and surgery
+  - text: Aşılama ve koruyucu hekimlik
+    text_en: Vaccinations and preventive medicine
+  - text: Beslenme danışmanlığı, mama ve bakım ürünleri
+    text_en: Nutrition advice, pet food and care products
+booking_photo: /assets/img/uploads/randevu.jpg
+booking_photo_alt: Kliniğin muayene odası ve ürün dolabı

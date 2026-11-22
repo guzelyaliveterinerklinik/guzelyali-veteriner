@@ -1,0 +1,19 @@
+{
+  "name": "guzelyali-veteriner",
+  "private": true,
+  "type": "module",
+  "description": "Güzelyalı Veteriner Kliniği web sitesi. İçerik content/ klasöründe, panel /admin adresinde.",
+  "scripts": {
+    "build": "node src/build.mjs",
+    "dev": "node src/dev.mjs"
+  },
+  "engines": { "node": ">=20" },
+  "dependencies": {
+    "js-yaml": "4.1.0",
+    "marked": "15.0.12",
+    "sharp": "0.34.5"
+  },
+  "devDependencies": {
+    "decap-server": "3.11.6"
+  }
+}

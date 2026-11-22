@@ -1,0 +1,107 @@
+items:
+  - title: Muayene ve Teşhis
+    title_en: Examination and Diagnosis
+    icon: steth
+    photo: /assets/img/uploads/hizmet-muayene.jpg
+    short: Genel muayene, ultrasonografi, röntgen ve teşhis hizmetleri.
+    short_en: General examination, ultrasound, X-ray and diagnostic services.
+    body: Muayeneye hayvanınızın geçmişini ve şikâyetini dinleyerek başlarız. Genel muayenenin ardından gerekirse ultrasonografi ve röntgenle teşhisi netleştirir, bulguları size açıkça anlatırız.
+    body_en: We start by listening to your pet’s history and the reason for the visit. After a general examination we confirm the diagnosis with ultrasound or X-ray when needed, and explain what we found clearly.
+    points:
+      - text: Genel muayene
+        text_en: General examination
+      - text: Ultrasonografi
+        text_en: Ultrasound
+      - text: Röntgen
+        text_en: X-ray
+      - text: Şikâyete yönelik teşhis
+        text_en: Diagnosis of specific complaints
+  - title: Tedavi ve Cerrahi
+    title_en: Treatment and Surgery
+    icon: scalpel
+    photo: /assets/img/uploads/hizmet-tedavi-cerrahi.jpg
+    short: Tedavi, yoğun bakım, cerrahi müdahaleler ve sezaryen.
+    short_en: Treatment, intensive care, surgery and caesarean sections.
+    body: Teşhisin ardından tedavi planını sizinle birlikte yaparız. Durumu ağır hastaları yoğun bakımda gözetim altında tutar; cerrahi müdahaleleri ve sezaryeni anestezi öncesi değerlendirmenin ardından gerçekleştiririz.
+    body_en: After diagnosis we plan the treatment together with you. Seriously ill patients stay in intensive care under supervision, and surgery and caesarean sections are carried out after a pre-anaesthetic check.
+    points:
+      - text: Tedavi
+        text_en: Treatment
+      - text: Yoğun bakım
+        text_en: Intensive care
+      - text: Cerrahi müdahaleler
+        text_en: Surgery
+      - text: Sezaryen
+        text_en: Caesarean section
+  - title: Koruyucu Sağlık
+    title_en: Preventive Care
+    icon: syringe
+    photo: /assets/img/uploads/hizmet-koruyucu-saglik.jpg
+    short: Aşılama, koruyucu hekimlik ve rutin sağlık kontrolleri.
+    short_en: Vaccinations, preventive medicine and routine check-ups.
+    body: Hastalıkları ortaya çıkmadan önlemek, tedavi etmekten kolaydır. Aşı takvimini hayvanınızın yaşına ve yaşam koşullarına göre planlar, iç ve dış parazit uygulamalarını ve rutin sağlık kontrollerini takip ederiz.
+    body_en: Preventing disease is easier than treating it. We plan vaccines for your pet’s age and lifestyle, and keep track of parasite treatments and routine check-ups.
+    points:
+      - text: Aşılama
+        text_en: Vaccinations
+      - text: Koruyucu hekimlik
+        text_en: Preventive medicine
+      - text: İç ve dış parazit uygulamaları
+        text_en: Internal and external parasite control
+      - text: Rutin sağlık kontrolleri
+        text_en: Routine check-ups
+  - title: Ağız ve Diş Sağlığı
+    title_en: Oral and Dental Care
+    icon: tooth
+    photo: /assets/img/uploads/hizmet-dis.jpg
+    short: Diş çekimi, diş taşı temizliği ve temel restoratif müdahaleler.
+    short_en: Tooth extraction, dental scaling and basic restorative work.
+    body: Ağız kokusu, kızarık diş eti ve diş taşı diş eti hastalığının işaretleridir. Diş taşı temizliğini, diş çekimini ve temel restoratif müdahaleleri anestezi öncesi değerlendirmenin ardından gerçekleştiririz.
+    body_en: Bad breath, red gums and tartar are signs of gum disease. We carry out scaling, extractions and basic restorative work after a pre-anaesthetic check.
+    points:
+      - text: Ağız ve diş muayenesi
+        text_en: Oral and dental examination
+      - text: Diş taşı temizliği
+        text_en: Dental scaling
+      - text: Diş çekimi
+        text_en: Tooth extraction
+      - text: Temel restoratif müdahaleler
+        text_en: Basic restorative work
+  - title: Bakım ve Beslenme
+    title_en: Grooming and Nutrition
+    icon: bowl
+    photo: /assets/img/uploads/hizmet-bakim-beslenme.jpg
+    short: Tıraş, beslenme danışmanlığı ve veteriner diyet mamaları.
+    short_en: Clipping, nutrition advice and veterinary diet foods.
+    body: Hayvanınızın yaşına, kilosuna ve sağlık durumuna göre beslenme planı hazırlar, gerekiyorsa veteriner diyet mamaları öneririz. Keçeleşmiş tüyler, deri sorunları ya da operasyon hazırlığı için tıraş da yaparız.
+    body_en: We plan meals for your pet’s age, weight and health, and recommend veterinary diet foods when needed. We also clip matted coats, problem skin and surgical sites.
+    points:
+      - text: Tıraş
+        text_en: Clipping
+      - text: Beslenme danışmanlığı
+        text_en: Nutrition advice
+      - text: Veteriner diyet mamaları
+        text_en: Veterinary diet foods
+      - text: Kilo kontrolü
+        text_en: Weight management
+  - title: Pet Shop ve Ürünler
+    title_en: Pet Shop and Products
+    icon: bag
+    photo: /assets/img/uploads/petshop.jpg
+    short: Mama, ödül mamaları, oyuncaklar, aksesuarlar ve günlük bakım ürünleri.
+    short_en: Food, treats, toys, accessories and everyday care products.
+    body: Kliniğimizdeki pet shop bölümünde mama ve ödül mamalarından oyuncak, aksesuar ve günlük bakım ürünlerine kadar dostlarınızın ihtiyaç duyduğu ürünleri bulabilirsiniz. Aradığınız ürünü WhatsApp’tan sorabilirsiniz.
+    body_en: Our pet shop has what your pets need, from food and treats to toys, accessories and everyday care products. Message us on WhatsApp to check whether we have what you are looking for.
+    points:
+      - text: Mama ve ödül mamaları
+        text_en: Food and treats
+      - text: Oyuncaklar
+        text_en: Toys
+      - text: Aksesuarlar
+        text_en: Accessories
+      - text: Günlük bakım ürünleri
+        text_en: Everyday care products
+    button: Ürün sor
+    button_en: Ask about a product
+    message: Merhaba, pet shop ürünleri hakkında bilgi almak istiyorum.
+    message_en: Hello, I would like to ask about pet shop products.

@@ -1,0 +1,42 @@
+phone: "+905419162053"
+phone_display: 0541 916 20 53
+email: destek@adanaguzelyaliveteriner.com
+whatsapp_message: Merhaba, randevu almak istiyorum.
+whatsapp_message_en: Hello, I would like to book an appointment.
+street: Anadolu Lisesi Cd. Özkan Apt. No:44/B
+district: Güzelyalı Mah., 01170 Çukurova / Adana
+maps_link: https://www.google.com/maps?cid=8820193507497878111
+instagram: https://www.instagram.com/guzelyaliveterinerklinik/
+rating: 4.9
+review_count: 177
+hours:
+  - day: Pazartesi
+    open: true
+    from: "09:30"
+    to: "20:00"
+  - day: Salı
+    open: true
+    from: "09:30"
+    to: "20:00"
+  - day: Çarşamba
+    open: true
+    from: "09:30"
+    to: "20:00"
+  - day: Perşembe
+    open: true
+    from: "09:30"
+    to: "20:00"
+  - day: Cuma
+    open: true
+    from: "09:30"
+    to: "20:00"
+  - day: Cumartesi
+    open: true
+    from: "09:30"
+    to: "20:00"
+  - day: Pazar
+    open: false
+hours_summary: Pzt–Cmt 09:30–20:00
+hours_summary_en: Mon–Sat 09:30–20:00
+contact_photo: /assets/img/uploads/iletisim.jpg
+contact_photo_alt: Kliniğin Anadolu Lisesi Caddesi’ndeki girişi ve tabelası

@@ -1,0 +1,13 @@
+# Netlify: her kayıtta (panelden yapılan değişiklikler dahil) siteyi yeniden üretir.
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# Panel sayfası arama motorlarında görünmesin.
+[[headers]]
+  for = "/admin/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"

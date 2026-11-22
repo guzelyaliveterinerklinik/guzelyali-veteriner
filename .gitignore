@@ -1,0 +1,14 @@
+# Üretilen site ve önbellek (barındırma servisi her seferinde yeniden üretir)
+dist/
+.cache/
+node_modules/
+
+# Yerel çalışma dosyaları ve büyük kaynak görseller (sitede kullanılmaz)
+.DS_Store
+.taste-skill/
+.claude/
+arsiv/
+Gorseller/
+kedi.png
+kedi-goz-kapali.png
+veterinary.jpg
