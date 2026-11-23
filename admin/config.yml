@@ -12,7 +12,7 @@ display_url: https://www.adanaguzelyaliveteriner.com
 #   GitHub       -> name: github, repo: KULLANICI/DEPO
 backend:
   name: github
-  repo: ramo228/guzelyali-veteriner
+  repo: guzelyaliveterinerklinik/guzelyali-veteriner
   branch: main
   commit_messages:
     create: "Yeni {{collection}}: {{slug}}"
