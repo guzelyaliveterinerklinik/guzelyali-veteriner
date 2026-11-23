@@ -3,7 +3,7 @@
 # barındırma servisi siteyi otomatik olarak yeniden üretir (npm run build) ve 1-2 dakikada yayına alır.
 
 locale: tr
-logo_url: /favicon.svg
+logo_url: /assets/img/logo/logo.svg
 site_url: https://www.adanaguzelyaliveteriner.com
 display_url: https://www.adanaguzelyaliveteriner.com
 
@@ -87,6 +87,7 @@ collections:
           - { label: "Telefon (uluslararası)", name: phone, widget: string, hint: "Arama ve WhatsApp bağlantıları için. Örnek: +905419162053" }
           - { label: "Telefon (sitede görünen)", name: phone_display, widget: string, hint: "Örnek: 0541 916 20 53" }
           - { label: "E-posta", name: email, widget: string, required: false, pattern: ['^[^@\s]+@[^@\s]+\.[^@\s]+$', "Geçerli bir e-posta adresi yazın"], hint: "Altbilgide ve İletişim sayfasında görünür." }
+          - { label: "İşletmenin resmî unvanı", name: legal_name, widget: string, hint: "Vergi levhasındaki unvan. KVKK Aydınlatma Metni'nde veri sorumlusu olarak görünür." }
           - { label: "WhatsApp hazır mesajı", name: whatsapp_message, widget: string, hint: "Randevu butonlarına basınca WhatsApp'ta yazılı gelen cümle." }
           - { label: "İngilizce · WhatsApp hazır mesajı", name: whatsapp_message_en, widget: string, required: false }
           - { label: "Adres (cadde, apartman, numara)", name: street, widget: string }
@@ -111,6 +112,7 @@ collections:
           - { label: "İngilizce · Saatlerin kısa yazımı", name: hours_summary_en, widget: string, required: false, hint: "Örnek: Mon–Sat 09:30–20:00" }
           - { label: "İletişim sayfası fotoğrafı", name: contact_photo, widget: image, choose_url: false, hint: "Haritanın yanında durur. Kliniğin dış cephesi en uygunu." }
           - { label: "İletişim fotoğrafında ne var?", name: contact_photo_alt, widget: string }
+          - { label: "İngilizce · İletişim fotoğrafında ne var?", name: contact_photo_alt_en, widget: string, required: false }
 
       - name: anasayfa
         label: "Anasayfa"
@@ -129,6 +131,7 @@ collections:
               - { label: "İngilizce · Madde", name: text_en, widget: string, required: false }
           - { label: "“Randevu üç adımda” fotoğrafı", name: booking_photo, widget: image, choose_url: false }
           - { label: "Bu fotoğrafta ne var?", name: booking_photo_alt, widget: string }
+          - { label: "İngilizce · Bu fotoğrafta ne var?", name: booking_photo_alt_en, widget: string, required: false }
           - { label: "İngilizce · Büyük başlık", name: hero_title_en, widget: string, required: false }
           - { label: "İngilizce · Başlığın altındaki yazı", name: hero_text_en, widget: text, required: false }
           - { label: "İngilizce · Hakkımızda başlığı", name: about_title_en, widget: string, required: false }
@@ -149,6 +152,7 @@ collections:
               - { label: "İngilizce · Paragraf", name: text_en, widget: text, required: false }
           - { label: "Klinik fotoğrafı", name: clinic_photo, widget: image, choose_url: false }
           - { label: "Klinik fotoğrafında ne var?", name: clinic_photo_alt, widget: string }
+          - { label: "İngilizce · Klinik fotoğrafında ne var?", name: clinic_photo_alt_en, widget: string, required: false }
           - { label: "Hekimin adı", name: vet_name, widget: string }
           - { label: "Hekimin fotoğrafı", name: vet_photo, widget: image, choose_url: false, hint: "Kare bir portre en iyi sonucu verir." }
           - { label: "Hekim hakkında yazı", name: vet_text, widget: text }
@@ -229,3 +233,23 @@ collections:
               - { label: "İsim (ad ve soyadın baş harfi)", name: name, widget: string, hint: "Örnek: Turgay K." }
               - { label: "Yorum", name: text, widget: text }
               - { label: "İngilizce · Yorum", name: text_en, widget: text, required: false }
+
+  # ---------------------------------------------------------------- Yasal metinler
+  - name: yasal
+    label: Yasal metinler
+    description: "KVKK Aydınlatma Metni ve Çerez Politikası. Metinlerdeki {{unvan}}, {{adres}}, {{eposta}}, {{telefon}} ifadeleri “İletişim ve çalışma saatleri” bölümündeki bilgilerle otomatik doldurulur. Değişiklik yapmadan önce bir hukukçuya danışmanız önerilir."
+    delete: false
+    files:
+      - name: kvkk
+        label: "KVKK Aydınlatma Metni"
+        file: content/yasal/kvkk.md
+        fields: &legalfields
+          - { label: "Başlık", name: title, widget: string }
+          - { label: "Son güncelleme tarihi", name: updated, widget: datetime, format: "YYYY-MM-DD", date_format: "DD.MM.YYYY", time_format: false, picker_utc: true }
+          - { label: "Metin", name: body, widget: markdown, modes: [rich_text], buttons: [bold, italic, link, heading-two, bulleted-list, numbered-list], editor_components: [] }
+          - { label: "İngilizce · Başlık", name: title_en, widget: string, required: false }
+          - { label: "İngilizce · Metin", name: body_en, widget: markdown, required: false, modes: [rich_text], buttons: [bold, italic, link, heading-two, bulleted-list, numbered-list], editor_components: [] }
+      - name: cerez
+        label: "Çerez Politikası"
+        file: content/yasal/cerez.md
+        fields: *legalfields

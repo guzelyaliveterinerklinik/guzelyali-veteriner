@@ -60,3 +60,4 @@ Bütün hesaplar **kliniğin e-postasıyla** açılmalı. Böylece site, siz olm
 | Sayfa şablonları | `src/build.mjs` |
 | İçeriği okuyan ve fotoğrafları küçülten kod | `src/content.mjs` |
 | Hero'daki kedi | `assets/img/kedi-*.webp`, göz konumları `src/build.mjs` içindeki `CAT` |
+| Link paylaşım görseli (WhatsApp, Instagram önizlemesi) | `share.jpg` (1200×630). Tasarımı `src/paylasim/share.html`; değiştirdikten sonra sayfanın 1200×630 ekran görüntüsünü alıp `share.jpg` olarak kaydedin. Blog yazıları kendi kapak fotoğrafını kullanır. |

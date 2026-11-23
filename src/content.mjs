@@ -108,7 +108,7 @@ export async function loadContent() {
     waText: { tr: clean(S.whatsapp_message), en: clean(S.whatsapp_message_en) || clean(S.whatsapp_message) },
     hoursShort: { tr: clean(S.hours_summary), en: clean(S.hours_summary_en) || clean(S.hours_summary) },
     contactPhoto: clean(S.contact_photo),
-    contactPhotoAlt: clean(S.contact_photo_alt),
+    contactPhotoAlt: { tr: clean(S.contact_photo_alt), en: clean(S.contact_photo_alt_en) || clean(S.contact_photo_alt) },
   };
 
   // Opening hours, indexed by JavaScript day number (0 = Sunday).
@@ -165,11 +165,29 @@ export async function loadContent() {
   }
   POSTS.sort((a, b) => (a.date < b.date ? 1 : -1));
 
+  // Legal pages: content/yasal/*.md. {{unvan}}, {{adres}}, {{eposta}}, {{telefon}} and {{site}} are filled from the settings.
+  const fill = (t) => clean(t)
+    .replace(/\{\{unvan\}\}/g, clean(S.legal_name) || CLINIC.name)
+    .replace(/\{\{adres\}\}/g, `${CLINIC.street}, ${CLINIC.district}`)
+    .replace(/\{\{eposta\}\}/g, CLINIC.email)
+    .replace(/\{\{telefon\}\}/g, CLINIC.phoneShow)
+    .replace(/\{\{site\}\}/g, 'www.adanaguzelyaliveteriner.com');
+  const legalMd = (src) => marked.parse(fill(src), { gfm: true, breaks: true });
+  const LEGALDOCS = {};
+  for (const [key, file] of [['kvkk', 'kvkk.md'], ['cookies', 'cerez.md']]) {
+    const { data: d, body } = frontMatter(fs.readFileSync(path.join(CONTENT, 'yasal', file), 'utf8'));
+    LEGALDOCS[key] = {
+      updated: isoDate(d.updated),
+      tr: { title: clean(d.title), body: legalMd(body) },
+      en: { title: clean(d.title_en) || clean(d.title), body: legalMd(d.body_en || body) },
+    };
+  }
+
   const photos = new Set([
     clean(ABOUT.vet_photo), clean(ABOUT.clinic_photo), clean(HOME.booking_photo), CLINIC.contactPhoto,
     ...SERVICES.map((s) => s.photo), ...POSTS.map((p) => p.cover),
   ].filter(Boolean));
   const images = await prepareImages([...photos]);
 
-  return { CLINIC, HOURS, SERVICES, FAQ, REVIEWS, POSTS, HOME, ABOUT, images, CACHE, pickText: pick };
+  return { CLINIC, HOURS, SERVICES, FAQ, REVIEWS, POSTS, HOME, ABOUT, LEGALDOCS, images, CACHE, pickText: pick };
 }

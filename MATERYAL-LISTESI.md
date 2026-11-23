@@ -11,9 +11,9 @@ Sitedeki fotoğraflar artık **site panelinden** değiştiriliyor (bkz. `PANEL-K
 |---|---|---|
 | `hizmet-muayene.jpg` | Muayene ve Teşhis | Kulağı muayene edilen kedi (yapay zekâ görseli) |
 | `hizmet-tedavi-cerrahi.jpg` | Tedavi ve Cerrahi | Ameliyat masası (yapay zekâ görseli) |
-| `hizmet-koruyucu-saglik.jpg` | Koruyucu Sağlık | Aşı şişesi ve beagle (yapay zekâ görseli) |
+| `hizmet-koruyucu-saglik.jpg` | Koruyucu Sağlık | Muayene masasında yakalıklı köpek (Gorseller/Preventive Care.jpg) |
 | `hizmet-dis.jpg` | Ağız ve Diş Sağlığı | Diş kontrolü (yapay zekâ görseli) |
-| `hizmet-bakim-beslenme.jpg` | Bakım ve Beslenme | Taranan maltese (yapay zekâ görseli) |
+| `hizmet-bakim-beslenme.jpg` | Bakım ve Beslenme | Tıraş edilen corgi (Gorseller/Grooming.jpg) |
 | `petshop.jpg` | Pet Shop ve Ürünler | Mama ve aksesuarlar (yapay zekâ görseli) |
 | `klinik.jpg` | Hakkımızda | Kliniğin dış cephesi (DSCF0879) |
 | `randevu.jpg` | Anasayfa, "Randevu üç adımda" | Kliniğin muayene odası (DSCF0886) |
@@ -38,6 +38,7 @@ Salim Bey'in portresi (`assets/img/salim-960.jpg`) kliniğin kendi fotoğrafı, 
 
 ## 3. Sitede yazan ve doğrulanması gereken bilgiler
 
+- [ ] **KVKK Aydınlatma Metni ve Çerez Politikası** hazırlandı (altbilgide "Yasal" sütunu). İşletmenin vergi levhasındaki **resmî unvanı** panelde "İletişim ve çalışma saatleri → İşletmenin resmî unvanı" alanına yazılmalı (şu an "Güzelyalı Veteriner Kliniği – Veteriner Hekim Salim Hakveren" yazıyor). Metinlerin yayından önce bir hukukçuya ya da mali müşavire gösterilmesi önerilir.
 - [x] Hizmetler kliniğin verdiği 6 gruba göre düzenlendi; Pet Shop ürün grupları da eklendi.
 - [ ] Aşılar karneye işleniyor ve sonraki tarih bildiriliyor mu?
 - [ ] Yoğun bakımda hasta gece de kalabiliyor mu? Sitede "gözetim altında" diye genel yazıyor.

@@ -9,7 +9,12 @@ export const PAGES = {
   services: { tr: 'hizmetler.html', en: 'en/services.html' },
   blog: { tr: 'blog.html', en: 'en/blog.html' },
   contact: { tr: 'iletisim.html', en: 'en/contact.html' },
+  kvkk: { tr: 'kvkk-aydinlatma-metni.html', en: 'en/privacy-notice.html' },
+  cookies: { tr: 'cerez-politikasi.html', en: 'en/cookie-policy.html' },
 };
+
+// Legal pages (texts in content/yasal/), listed in the footer's legal column.
+export const LEGAL = ['kvkk', 'cookies'];
 
 export const NAV = ['services', 'about', 'blog', 'contact'];
 
@@ -43,6 +48,10 @@ export const UI = {
     footerServices: 'Hizmetler',
     footerContact: 'İletişim',
     footerHours: 'Çalışma saatleri',
+    footerLegal: 'Yasal',
+    legal: { kvkk: 'KVKK Aydınlatma Metni', cookies: 'Çerez Politikası' },
+    lastUpdated: 'Son güncelleme',
+    formNote: (link) => `Formda yazdıklarınız WhatsApp üzerinden kliniğimize iletilir. Kişisel verileriniz ${link} kapsamında işlenir.`,
     rights: 'Tüm hakları saklıdır.',
     note: 'Bu yazı genel bilgilendirme amaçlıdır ve muayenenin yerini tutmaz. Hayvanınıza özel öneri için randevu alın.',
     related: 'Diğer yazılar',
@@ -85,6 +94,10 @@ export const UI = {
     footerServices: 'Services',
     footerContact: 'Contact',
     footerHours: 'Opening hours',
+    footerLegal: 'Legal',
+    legal: { kvkk: 'Privacy Notice (KVKK)', cookies: 'Cookie Policy' },
+    lastUpdated: 'Last updated',
+    formNote: (link) => `What you write in this form is sent to the clinic via WhatsApp. Your personal data is processed as described in our ${link}.`,
     rights: 'All rights reserved.',
     note: 'This article is general information and does not replace an examination. Book a visit for advice specific to your pet.',
     related: 'More articles',

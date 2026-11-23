@@ -3,11 +3,11 @@
 // Run from the project folder: npm run build
 import { writeFileSync, mkdirSync, rmSync, cpSync, readdirSync, existsSync } from 'node:fs';
 import { posix as path } from 'node:path';
-import { PAGES, NAV, UI, SITE_URL } from './data.mjs';
+import { PAGES, NAV, UI, SITE_URL, LEGAL } from './data.mjs';
 import { loadContent, ROOT } from './content.mjs';
 
 const C = await loadContent();
-const { CLINIC, HOURS, SERVICES, FAQ, REVIEWS, POSTS, HOME, ABOUT, images, pickText } = C;
+const { CLINIC, HOURS, SERVICES, FAQ, REVIEWS, POSTS, HOME, ABOUT, LEGALDOCS, images, pickText } = C;
 const OUT = path.join(ROOT, 'dist');
 // Texts the clinic edits in the panel override the defaults in data.mjs.
 for (const l of ['tr', 'en']) {
@@ -23,6 +23,13 @@ const other = (l) => (l === 'tr' ? 'en' : 'tr');
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
 const postFile = (p, l) => (l === 'tr' ? `blog/${p.slug.tr}.html` : `en/blog/${p.slug.en}.html`);
+// Page title with the clinic's name, shortened when it would pass ~60 characters (search results cut longer ones).
+const titleFor = (t, l) => {
+  for (const suffix of [l === 'tr' ? ' | Güzelyalı Veteriner Kliniği' : ' | Güzelyalı Veterinary Clinic', l === 'tr' ? ' | Güzelyalı Veteriner' : ' | Güzelyalı Vet']) {
+    if ((t + suffix).length <= 60) return t + suffix;
+  }
+  return t;
+};
 const postsIn = (l) => POSTS.filter((p) => l === 'tr' || p.en);
 const T = (o, k, l) => pickText(o, k, l);
 const svcAnchor = (s, l) => s.anchor[l];
@@ -115,7 +122,6 @@ function heroCat(from, l) {
       </div>`;
 }
 const stars = (l) => `<span class="stars" role="img" aria-label="${UI[l].stars}">${I.star.repeat(5)}</span>`;
-const MARK = '<svg class="brand__mark" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="20" fill="#B8341C"/><g fill="#FFF8F1"><ellipse cx="20" cy="25" rx="7.2" ry="6.2"/><circle cx="11.8" cy="17.2" r="3.2"/><circle cx="17.1" cy="11.8" r="3.2"/><circle cx="22.9" cy="11.8" r="3.2"/><circle cx="28.2" cy="17.2" r="3.2"/></g></svg>';
 
 // ---------- images ----------
 // Any photo named in the content, as resized WebP copies (see prepareImages in content.mjs).
@@ -227,14 +233,13 @@ function layout({ l, file, pageKey, title, description, body, altFile, ogImage, 
     name: CLINIC.name,
     url: SITE_URL,
     image: `${SITE_URL}/share.jpg`,
-    logo: `${SITE_URL}/favicon.svg`,
+    logo: `${SITE_URL}/apple-touch-icon.png`,
     telephone: CLINIC.phoneIntl,
     ...(CLINIC.email ? { email: CLINIC.email } : {}),
     address: { '@type': 'PostalAddress', streetAddress: `${CLINIC.street}, ${CLINIC.district.split(',')[0]}`, addressLocality: 'Çukurova', addressRegion: 'Adana', postalCode: (CLINIC.district.match(/\b\d{5}\b/) || ['01170'])[0], addressCountry: 'TR' },
     geo: { '@type': 'GeoCoordinates', latitude: 37.0552971, longitude: 35.2831154 },
     hasMap: CLINIC.maps,
     openingHoursSpecification: HOURS.map((h, i) => (h ? { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][i], opens: h.from, closes: h.to } : null)).filter(Boolean),
-    aggregateRating: { '@type': 'AggregateRating', ratingValue: CLINIC.ratingNum, reviewCount: CLINIC.reviews },
     founder: { '@type': 'Person', name: CLINIC.vet, jobTitle: tr ? 'Veteriner Hekim' : 'Veterinarian' },
     employee: { '@type': 'Person', name: CLINIC.vet, jobTitle: tr ? 'Veteriner Hekim' : 'Veterinarian' },
     sameAs: [CLINIC.instagram],
@@ -265,9 +270,9 @@ ${twin ? `<link rel="alternate" hreflang="${l}" href="${url(file)}">
 <link rel="alternate" hreflang="${other(l)}" href="${url(altFile)}">
 <link rel="alternate" hreflang="x-default" href="${url(tr ? file : altFile)}">` : ''}
 <link rel="icon" href="${a('favicon.svg')}" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet">
+<link rel="apple-touch-icon" href="${a('apple-touch-icon.png')}">
+<link rel="preload" href="${a('assets/fonts/figtree.woff2')}" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="${a('assets/fonts/fonts.css')}">
 <link rel="stylesheet" href="${a('assets/css/main.css')}">
 <script>document.documentElement.classList.add('js')</script>
 ${ld}
@@ -277,7 +282,7 @@ ${ld}
 
 <header class="header" data-header>
   <div class="wrap header__in">
-    <a class="brand" href="${a(PAGES.home[l])}">${MARK}<span class="brand__name">Güzelyalı<small>${tr ? 'Veteriner Kliniği' : 'Veterinary Clinic'}</small></span></a>
+    <a class="brand" href="${a(PAGES.home[l])}"><img class="brand__logo" src="${a('assets/img/logo/logo.svg')}" width="559" height="150" alt="${CLINIC.name}"></a>
     <nav class="nav" aria-label="${u.menu}"><ul>${navItems}</ul></nav>
     <div class="header__end">
       <div class="lang" role="group" aria-label="${u.langLabel}">
@@ -309,7 +314,7 @@ ${noCta ? '' : ctaBand(file, l)}
   <div class="wrap">
     <div class="footer__grid">
       <div class="footer__brand">
-        <a class="brand brand--light" href="${a(PAGES.home[l])}">${MARK}<span class="brand__name">Güzelyalı<small>${tr ? 'Veteriner Kliniği' : 'Veterinary Clinic'}</small></span></a>
+        <a class="brand brand--light" href="${a(PAGES.home[l])}"><img class="brand__logo" src="${a('assets/img/logo/logo-beyaz.svg')}" width="559" height="150" alt="${CLINIC.name}"></a>
         <p>${u.footerAbout}</p>
         <a class="footer__social" href="${CLINIC.instagram}" ${ext}>${I.ig}<span>${CLINIC.igHandle}</span></a>
       </div>
@@ -326,6 +331,10 @@ ${noCta ? '' : ctaBand(file, l)}
         <address>${CLINIC.street}<br>${CLINIC.district}</address>
         <p><a href="tel:${CLINIC.phone}">${tr ? CLINIC.phoneShow : CLINIC.phoneShowEn}</a>${CLINIC.email ? `<br><a href="mailto:${CLINIC.email}">${CLINIC.email}</a>` : ''}</p>
         <p>${u.hoursShort}<br>${u.sundayClosed}</p>
+      </div>
+      <div>
+        <h2 class="footer__h">${u.footerLegal}</h2>
+        <ul>${LEGAL.map((k) => `<li><a href="${a(PAGES[k][l])}"${k === pageKey ? ' aria-current="page"' : ''}>${u.legal[k]}</a></li>`).join('')}</ul>
       </div>
     </div>
     <div class="footer__bottom">
@@ -629,7 +638,7 @@ function post(p, l) {
         <p class="meta"><span class="tag">${t.tag}</span><time datetime="${p.date}">${fmtDate(p.date, l)}</time><span>${u.minRead(readMins(t.body))}</span></p>
         <h1>${t.title}</h1>
         <p class="lead">${t.excerpt}</p>
-        <p class="byline">${MARK}<span>${u.by}</span></p>
+        <p class="byline"><img class="byline__icon" src="${rel(file, 'assets/img/logo/logo-ikon.svg')}" width="447" height="413" alt=""><span>${u.by}</span></p>
       </div>
     </div>
   </header>
@@ -663,7 +672,7 @@ ${related.map((x) => postCard(file, x, l)).join('\n')}
   const articleLd = { '@context': 'https://schema.org', '@type': 'Article', mainEntityOfPage: url(file), image: `${SITE_URL}/${images.get(p.cover).og}`, headline: t.title, description: t.excerpt, datePublished: p.date, inLanguage: l, author: { '@type': 'Organization', name: CLINIC.name }, publisher: { '@type': 'Organization', name: CLINIC.name } };
   return layout({
     l, file, pageKey: 'post', altFile: l === 'tr' && !p.en ? PAGES.blog.en : postFile(p, other(l)), body, jsonld: [articleLd],
-    title: `${t.title} | ${tr ? 'Güzelyalı Veteriner Kliniği' : 'Güzelyalı Veterinary Clinic'}`,
+    title: titleFor(t.title, l),
     description: t.excerpt,
     ogImage: images.get(p.cover).og,
   });
@@ -723,13 +732,14 @@ ${SERVICES.filter((s) => !svcText(s, l).cta).map((s) => `            <option>${e
       </div>
       <input type="hidden" name="text" value="${esc(u.waText)}">
       <button class="btn btn--primary" type="submit">${I.wa}<span>${tr ? 'WhatsApp’ta hazırla' : 'Prepare in WhatsApp'}</span></button>
+      <p class="form__note">${u.formNote(`<a href="${rel(file, PAGES.kvkk[l])}">${u.legal.kvkk}</a>`)}</p>
     </form>
   </div>
 </section>
 
 <section class="sec sec--surface sec--tight" aria-label="${u.mapTitle}">
   <div class="wrap find">
-    <figure class="find__photo">${pic(file, CLINIC.contactPhoto, CLINIC.contactPhotoAlt, { sizes: '(max-width: 900px) 100vw, 45vw' })}</figure>
+    <figure class="find__photo">${pic(file, CLINIC.contactPhoto, CLINIC.contactPhotoAlt[l], { sizes: '(max-width: 900px) 100vw, 45vw' })}</figure>
     ${mapBlock(l)}
   </div>
 </section>`;
@@ -738,6 +748,54 @@ ${SERVICES.filter((s) => !svcText(s, l).cta).map((s) => `            <option>${e
     title: tr ? 'İletişim | Güzelyalı Veteriner Kliniği' : 'Contact | Güzelyalı Veterinary Clinic',
     description: tr ? `${CLINIC.street}, ${CLINIC.district}. Telefon ve WhatsApp: ${CLINIC.phoneShow}. ${UI.tr.hoursShort}.` : `${CLINIC.street}, ${CLINIC.district}. Phone and WhatsApp: ${CLINIC.phoneShowEn}. ${UI.en.hoursShort}.`,
   });
+}
+
+function legal(l, key) {
+  const file = PAGES[key][l];
+  const u = UI[l];
+  const doc = LEGALDOCS[key][l];
+  const body = `
+${pageHero(file, l, [[u.legal[key]]], '', esc(doc.title), `${u.lastUpdated}: ${fmtDate(LEGALDOCS[key].updated, l)}`)}
+
+<section class="sec sec--tight">
+  <div class="wrap wrap--narrow">
+    <div class="prose legal">
+${doc.body.trim()}
+    </div>
+  </div>
+</section>`;
+  return layout({
+    l, file, pageKey: key, altFile: PAGES[key][other(l)], body, noCta: true,
+    title: titleFor(doc.title, l),
+    description: l === 'tr' ? `${CLINIC.name} ${doc.title.toLocaleLowerCase('tr')}.` : `${doc.title} of Güzelyalı Veterinary Clinic.`,
+  });
+}
+
+// "Page not found". Netlify serves dist/404.html for any missing address, at any depth,
+// so the page gets <base href="/"> and its links resolve from the site root.
+function notFound() {
+  const file = '404.html';
+  const l = 'tr';
+  const u = UI.tr;
+  const body = `
+<section class="sec nf">
+  <div class="wrap nf__in">
+    <p class="eyebrow">404</p>
+    <h1>Aradığınız sayfa bulunamadı</h1>
+    <p class="lead">Sayfanın adresi değişmiş ya da kaldırılmış olabilir. Aşağıdaki bağlantılardan devam edebilir ya da bize WhatsApp'tan yazabilirsiniz.</p>
+    <div class="btns">
+      <a class="btn btn--primary" href="${PAGES.home.tr}">Anasayfaya dön</a>
+      <a class="btn btn--outline" href="${PAGES.services.tr}">Hizmetlerimiz</a>
+      <a class="btn btn--outline" href="${PAGES.contact.tr}">İletişim</a>
+    </div>
+    <p class="nf__en" lang="en">Page not found. <a href="${PAGES.home.en}">Go to the English homepage</a>.</p>
+  </div>
+</section>`;
+  return layout({ l, file, pageKey: '404', altFile: PAGES.home.en, body, noCta: true, title: 'Sayfa bulunamadı | Güzelyalı Veteriner Kliniği', description: 'Aradığınız sayfa bulunamadı.' })
+    .replace('<meta charset="utf-8">', '<meta charset="utf-8">\n<base href="/">\n<meta name="robots" content="noindex">')
+    .replace(/<link rel="canonical"[^>]*>\n/, '')
+    .replace(/<link rel="alternate" hreflang[^>]*>\n/g, '')
+    .replace('href="#main"', 'href="/404.html#main"');
 }
 
 // ---------- write ----------
@@ -750,7 +808,7 @@ function write(file, html) {
 rmSync(OUT, { recursive: true, force: true });
 mkdirSync(OUT, { recursive: true });
 // Static files the pages use, plus the admin panel and the clinic's original uploads (the panel shows them).
-for (const p of ['assets/css', 'assets/js', 'assets/img/uploads', 'admin', 'favicon.svg', 'share.jpg']) {
+for (const p of ['assets/css', 'assets/js', 'assets/img/uploads', 'assets/img/logo', 'assets/fonts', 'admin', 'favicon.svg', 'apple-touch-icon.png', 'share.jpg']) {
   if (existsSync(path.join(ROOT, p))) cpSync(path.join(ROOT, p), path.join(OUT, p), { recursive: true });
 }
 for (const f of readdirSync(path.join(ROOT, 'assets/img')).filter((f) => f.startsWith('kedi-'))) {
@@ -765,9 +823,11 @@ for (const l of LANGS) {
   write(PAGES.services[l], services(l));
   write(PAGES.blog[l], blog(l));
   write(PAGES.contact[l], contact(l));
-  pages += 5;
+  for (const k of LEGAL) write(PAGES[k][l], legal(l, k));
+  pages += 5 + LEGAL.length;
   for (const p of postsIn(l)) { write(postFile(p, l), post(p, l)); pages++; }
 }
+write('404.html', notFound());
 // sitemap.xml lists every page; robots.txt points to it and keeps the panel out of search results.
 const today = new Date().toISOString().slice(0, 10);
 const entries = [];

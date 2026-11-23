@@ -1,6 +1,7 @@
 phone: "+905419162053"
 phone_display: 0541 916 20 53
 email: destek@adanaguzelyaliveteriner.com
+legal_name: "Güzelyalı Veteriner Kliniği – Veteriner Hekim Salim Hakveren"
 whatsapp_message: Merhaba, randevu almak istiyorum.
 whatsapp_message_en: Hello, I would like to book an appointment.
 street: Anadolu Lisesi Cd. Özkan Apt. No:44/B
@@ -40,3 +41,4 @@ hours_summary: Pzt–Cmt 09:30–20:00
 hours_summary_en: Mon–Sat 09:30–20:00
 contact_photo: /assets/img/uploads/iletisim.jpg
 contact_photo_alt: Kliniğin Anadolu Lisesi Caddesi’ndeki girişi ve tabelası
+contact_photo_alt_en: The clinic's entrance and sign on Anadolu Lisesi Street

@@ -20,7 +20,12 @@ http.createServer((req, res) => {
   let p = decodeURIComponent(new URL(req.url, 'http://x').pathname);
   if (p.endsWith('/')) p += 'index.html';
   const file = path.join(DIST, p);
-  if (!file.startsWith(DIST) || !existsSync(file) || statSync(file).isDirectory()) { res.writeHead(404); return res.end('Bulunamadı'); }
+  if (!file.startsWith(DIST) || !existsSync(file) || statSync(file).isDirectory()) {
+    // Like Netlify: a missing address shows the site's own 404 page.
+    const nf = path.join(DIST, '404.html');
+    res.writeHead(404, { 'Content-Type': 'text/html; charset=utf-8' });
+    return existsSync(nf) ? createReadStream(nf).pipe(res) : res.end('Bulunamadı');
+  }
   res.writeHead(200, { 'Content-Type': TYPES[path.extname(file)] || 'application/octet-stream', 'Cache-Control': 'no-store' });
   createReadStream(file).pipe(res);
 }).listen(5180, '127.0.0.1', () => console.log('Site: http://127.0.0.1:5180   Panel: http://127.0.0.1:5180/admin/'));
