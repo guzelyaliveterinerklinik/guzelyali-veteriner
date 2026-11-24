@@ -24,20 +24,21 @@ Bütün hesaplar **kliniğin e-postasıyla** açılmalı. Böylece site, siz olm
 
 1. **GitHub:** Kliniğin e-postasıyla ücretsiz bir hesap açın, boş ve gizli (private) bir depo oluşturun. Proje klasörünü bu depoya yükleyin. `.gitignore`, büyük kaynak görselleri ve arşivi dışarıda bırakır.
 2. **Netlify** (ya da Cloudflare Pages): Kliniğin e-postasıyla açın, **Add new site → Import from Git** ile depoyu seçin. Derleme ayarları `netlify.toml` dosyasından otomatik okunur: komut `npm run build`, yayın klasörü `dist`.
-3. **Alan adı:** `adanaguzelyaliveteriner.com` alındı. Ana adres **www.adanaguzelyaliveteriner.com**.
-   1. Netlify'da **Domain management → Add a domain** ile `www.adanaguzelyaliveteriner.com` adresini ekleyin ve ana adres (primary) yapın. `www` olmadan yazılan adres otomatik olarak buraya yönlenir. SSL sertifikası da otomatik kurulur.
+3. **Alan adı:** `adanaguzelyaliveteriner.com` alındı. Ana adres **adanaguzelyaliveteriner.com** (www'suz). Site 24 Kasım 2026'da yayına alındı.
+   1. Netlify'da **Domain management → Add a domain** alan adı eklendi. Ana adres (primary) `adanaguzelyaliveteriner.com`; `www` ile yazılan adres otomatik olarak buraya yönlenir. Ana adres değişirse `src/data.mjs` içindeki `SITE_URL` de aynı yapılmalı. SSL sertifikası da otomatik kurulur.
    2. Alan adını aldığınız firmanın DNS panelinde yalnızca site kayıtlarını ekleyin. Netlify kendi panelinde tam değerleri gösterir:
-      - `www` için Netlify'ın verdiği `.netlify.app` adresine bir CNAME kaydı
-      - Kök alan adı (`@`) için Netlify'ın verdiği A ya da ALIAS kaydı
+      - `www` için CNAME → `guzelyali-veteriner.netlify.app`
+      - Kök alan adı (`@`) için A → `75.2.60.5`
+      - (Squarespace'te yapıldı; "Squarespace Defaults" kayıtları silindi, Google Workspace kayıtları korundu.)
    3. **Dikkat, e-posta:** `destek@adanaguzelyaliveteriner.com` adresinin MX, SPF, DKIM ve DMARC kayıtlarına dokunmayın. Ad sunucularını (nameserver) Netlify'a taşımayın; taşınırsa bu kayıtlar elle kopyalanmazsa e-posta çalışmayı durdurur.
 4. **Panel girişi:** İki yol var.
    - **Decap Turbo (önerilen):** İşletmeci e-postayla davet edilir ve kendi şifresiyle girer; GitHub hesabı gerekmez. [decapcms.org/turbo](https://decapcms.org/turbo/) üzerinden siteyi oluşturup GitHub deposunu bağlayın. Sonra `admin/config.yml` dosyasında `backend` → `name: turbo-github` yapın ve [bağlama rehberindeki](https://decapcms.org/docs/turbo-connecting-a-site/) site kimliğini ekleyin. Ücretlendirmeyi kurulum sırasında kontrol edin.
    - **GitHub girişi (ücretsiz):** İşletmeci ücretsiz bir GitHub hesabı açar ve depoya ortak çalışan (collaborator) olarak eklenir. `admin/config.yml` dosyasında `repo: KULLANICI/DEPO` alanını doldurun; Netlify'da **Site configuration → Access & security → OAuth** bölümünden GitHub sağlayıcısını kurun.
 5. **Alan adı bağlandıktan sonra:**
    - Hazır olanlar: Sitedeki canonical ve dil (hreflang) etiketleri, `sitemap.xml` ve `robots.txt` zaten bu alan adına göre üretiliyor. Adres `src/data.mjs` dosyasındaki `SITE_URL` alanında.
-   - **Google Search Console:** `https://www.adanaguzelyaliveteriner.com` adresini ekleyin, DNS TXT kaydıyla doğrulayın ve `sitemap.xml` dosyasını gönderin.
+   - **Google Search Console:** `https://adanaguzelyaliveteriner.com` adresini ekleyin, DNS TXT kaydıyla doğrulayın ve `sitemap.xml` dosyasını gönderin.
    - **Bing Webmaster Tools:** Search Console'dan içe aktarın. ChatGPT'nin araması Bing'i kullandığı için bu da önemli.
-   - **Google İşletme Profili:** "Web sitesi" alanına `https://www.adanaguzelyaliveteriner.com` yazın.
+   - **Google İşletme Profili:** "Web sitesi" alanına `https://adanaguzelyaliveteriner.com` yazın.
    - **Instagram:** Profildeki bağlantıyı aynı adresle güncelleyin.
 
 ## Panel nasıl çalışıyor

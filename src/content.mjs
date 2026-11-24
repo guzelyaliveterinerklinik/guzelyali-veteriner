@@ -171,7 +171,7 @@ export async function loadContent() {
     .replace(/\{\{adres\}\}/g, `${CLINIC.street}, ${CLINIC.district}`)
     .replace(/\{\{eposta\}\}/g, CLINIC.email)
     .replace(/\{\{telefon\}\}/g, CLINIC.phoneShow)
-    .replace(/\{\{site\}\}/g, 'www.adanaguzelyaliveteriner.com');
+    .replace(/\{\{site\}\}/g, 'adanaguzelyaliveteriner.com');
   const legalMd = (src) => marked.parse(fill(src), { gfm: true, breaks: true });
   const LEGALDOCS = {};
   for (const [key, file] of [['kvkk', 'kvkk.md'], ['cookies', 'cerez.md']]) {

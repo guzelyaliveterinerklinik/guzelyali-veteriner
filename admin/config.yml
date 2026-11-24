@@ -4,8 +4,8 @@
 
 locale: tr
 logo_url: /assets/img/logo/logo.svg
-site_url: https://www.adanaguzelyaliveteriner.com
-display_url: https://www.adanaguzelyaliveteriner.com
+site_url: https://adanaguzelyaliveteriner.com
+display_url: https://adanaguzelyaliveteriner.com
 
 # Canlı sitede giriş yöntemi. Yayına alırken doldurulacak (YAYINA-ALMA.md):
 #   Decap Turbo  -> name: turbo-github  (işletmeci e-postayla davet edilir, GitHub hesabı gerekmez)

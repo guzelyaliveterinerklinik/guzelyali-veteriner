@@ -55,7 +55,7 @@ Salim Bey'in portresi (`assets/img/salim-960.jpg`) kliniğin kendi fotoğrafı, 
 
 ## 5. Yayına almak için
 
-- [x] Alan adı: **www.adanaguzelyaliveteriner.com**, e-posta: **destek@adanaguzelyaliveteriner.com** (sitede altbilgide ve İletişim sayfasında).
+- [x] Alan adı: **adanaguzelyaliveteriner.com** (yayında), e-posta: **destek@adanaguzelyaliveteriner.com** (sitede altbilgide ve İletişim sayfasında).
 - [ ] Barındırma ücretsiz olabilir (Netlify, Vercel ya da Cloudflare Pages). Kurulumu ben yaparım.
 - [ ] Yayına alınca: Google Search Console'a site haritasını gönder, Google profilinde ve Instagram'da web sitesi adresini güncelle (adımlar `YAYINA-ALMA.md`).
 

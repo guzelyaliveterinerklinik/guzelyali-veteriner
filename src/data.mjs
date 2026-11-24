@@ -1,7 +1,7 @@
 // Fixed interface text and page addresses. Clinic content lives in content/ and is edited in the admin panel.
 
 // The live address. Canonical links, sitemap and link previews use it.
-export const SITE_URL = 'https://www.adanaguzelyaliveteriner.com';
+export const SITE_URL = 'https://adanaguzelyaliveteriner.com';
 
 export const PAGES = {
   home: { tr: 'index.html', en: 'en/index.html' },
